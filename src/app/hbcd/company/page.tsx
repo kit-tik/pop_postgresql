@@ -11,7 +11,7 @@ export default function Page() {
       <caption className='text-xl m-4'>List of Companies</caption>
       <thead>
         <tr className='bg-blue-500 text-white border border-slate-300 rounded-t-md'>
-          <th className="p-4 border border-slate-300 text-center">Biz Id</th>
+          {/* <th className="p-4 border border-slate-300 text-center">Biz Id</th> */}
           <th className="p-4 border border-slate-300 text-center">ชื่อ</th>
           <th className="p-4 border border-slate-300 text-center">ประเภทธุรกิจ</th>
           <th className="p-4 border border-slate-300 text-center">จังหวัด</th>
@@ -26,10 +26,10 @@ export default function Page() {
                   key={company.bizID}
                   className="hover:text-blue-500"
                   // style={{ backgroundImage: `url('/coldRoom.jpeg')` }}
-                >{company.bizID}
+                >{company.name}
           </Link>
           </td>
-        <td className="border border-slate-300 p-4 ">{company.name}</td>
+        {/* <td className="border border-slate-300 p-4 ">{company.name}</td> */}
         <td className="border border-slate-300 p-4 ">{company.bizType}</td>
         <td className="border border-slate-300 p-4 ">{company.province}</td>
       </tr>))}

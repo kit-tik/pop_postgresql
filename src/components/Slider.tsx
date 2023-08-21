@@ -31,7 +31,8 @@ const Slider = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] lg:flex-row bg-fuchsia-50">
+    <div>
+    <div className="flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] lg:flex-row bg-violet-50">
       {/* TEXT CONTAINER */}
       <div className="flex-1 flex items-center justify-center flex-col gap-8 text-blue-500 font-bold">
         <h1 className="text-5xl text-center uppercase p-4 md:p-10 md:text-6xl xl:text-7xl">
@@ -49,11 +50,23 @@ const Slider = () => {
       <div className="w-full flex-1 relative">
         <Image
           src={data[currentSlide].image}
-          alt=""
+          alt="a slider image"
           fill
+          sizes="(max-width: 768px) 100vw,50vw" 
           className="object-cover"
         />
       </div>
+    </div>
+      <div className="w-max relative z-10">
+        {/* Selected Control */}
+        <div className="absolute -top-10 left-[calc(50vw-3rem)] text-center  bg-violet-50/30 rounded-xl">
+        {data.map((item, idx) => (<span key={`${idx}-${item.id}`}>
+          {item.href && <Link  href={data[idx].href} ><span  className="mx-2 hover:scale-110">{currentSlide===idx?"🔵":"⚪"}</span></Link>}
+          </span>
+        ))}
+        </div>
+      </div>
+
     </div>
   );
 };

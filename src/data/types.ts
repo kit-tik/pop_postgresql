@@ -89,6 +89,7 @@ export type ColdRoom = {
   panelClass: string;
   foamMass: number;
   bizID: string;  // relationship to HBCDCompany
+  bizName: string;
 };
 export type HBCDCompany = {
   name: string;

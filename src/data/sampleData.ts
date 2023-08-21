@@ -59,6 +59,7 @@ export const hbcdCompanyData: HBCDCompany[] = [
 export const coldRoomsData: ColdRoom[] = [
 {
     bizID:"0905546001862",
+    bizName: "ปิติฟู้ดส์วังน้อย",
     RID: "C368.211.R1035",
     roomType: "ห้องเย็น",
     coldRoomAddress: "1ที่ตั้งคลัง 85 หมู่ 1 ถนน พหลโยธิน ตำบล สนับทึบ อำเภอ วังน้อย จังหวัด พระนครศรีอยุธยา 13170",
@@ -79,6 +80,7 @@ export const coldRoomsData: ColdRoom[] = [
     },
     {
         bizID:"0905546001862",
+        bizName: "ปิติฟู้ดส์วังน้อย",
         RID: "C368.211.R1036",
         roomType: "ห้องเย็น",
         coldRoomAddress: "1ที่ตั้งคลัง 85 หมู่ 1 ถนน พหลโยธิน ตำบล สนับทึบ อำเภอ วังน้อย จังหวัด พระนครศรีอยุธยา 13170",
@@ -99,6 +101,7 @@ export const coldRoomsData: ColdRoom[] = [
     },
     {
         bizID:"0905546001862",
+        bizName: "ปิติฟู้ดส์วังน้อย",
         RID: "C368.211.R1037",
         roomType: "ห้องเย็น",
         coldRoomAddress: "1ที่ตั้งคลัง 85 หมู่ 1 ถนน พหลโยธิน ตำบล สนับทึบ อำเภอ วังน้อย จังหวัด พระนครศรีอยุธยา 13170",
@@ -119,6 +122,7 @@ export const coldRoomsData: ColdRoom[] = [
     },
     {
      bizID: "0115531000200",
+     bizName: "ปิติห้องเย็น",
     RID: "C366.213.R1002",
     roomType: "ห้องเย็น",
     coldRoomAddress: "1ที่ตั้งคลัง 333,333/1 หมู่ 4 ซอย โรงงานกระดาษ ถนน ท้ายบ้าน ตำบล ท้ายบ้าน อำเภอ เมืองสมุทรปราการ จังหวัด สมุทรปราการ 10280",
@@ -139,6 +143,7 @@ export const coldRoomsData: ColdRoom[] = [
     },
     {
         bizID: "0115531000200",
+        bizName: "ปิติห้องเย็น",
         RID: "C366.213.R1002",
         roomType: "ห้องเย็น",
         coldRoomAddress: "1ที่ตั้งคลัง 333,333/1 หมู่ 4 ซอย โรงงานกระดาษ ถนน ท้ายบ้าน ตำบล ท้ายบ้าน อำเภอ เมืองสมุทรปราการ จังหวัด สมุทรปราการ 10280",
@@ -159,6 +164,7 @@ export const coldRoomsData: ColdRoom[] = [
     },
     {
         bizID: "0115531000200",
+        bizName: "ปิติห้องเย็น",
         RID: "C366.213.R1004",
         roomType: "ห้องเย็น",
         coldRoomAddress: "1ที่ตั้งคลัง 333,333/1 หมู่ 4 ซอย โรงงานกระดาษ ถนน ท้ายบ้าน ตำบล ท้ายบ้าน อำเภอ เมืองสมุทรปราการ จังหวัด สมุทรปราการ 10280",
@@ -173,12 +179,13 @@ export const coldRoomsData: ColdRoom[] = [
         maxTemp: 0,
         minTemp: -25, 
         constructionType: "ผนังบุโฟม ใช้ระบบความเย็น Air Blast",
-        year: 2005,
+        year: 2006,
         panelClass: "EPS",
         foamMass: 4080,
     },
     {
         bizID: "0115531000200",
+        bizName: "ปิติห้องเย็น",
         RID: "C366.213.R1008",
         roomType: "ห้องเย็น",
         coldRoomAddress: "1ที่ตั้งคลัง 333,333/1 หมู่ 4 ซอย โรงงานกระดาษ ถนน ท้ายบ้าน ตำบล ท้ายบ้าน อำเภอ เมืองสมุทรปราการ จังหวัด สมุทรปราการ 10280",
@@ -193,12 +200,13 @@ export const coldRoomsData: ColdRoom[] = [
         maxTemp: -18,
         minTemp: -25, 
         constructionType: "ผนังบุโฟม ใช้ระบบความเย็น Unit Cooler",
-        year: 2005,
+        year: 2007,
         panelClass: "EPS",
         foamMass: 4080,
     },
     {
         bizID: "0115531000200",
+        bizName: "ปิติห้องเย็น",
         RID: "C366.213.R1011",
         roomType: "ห้องเย็น",
         coldRoomAddress: "1ที่ตั้งคลัง 333,333/1 หมู่ 4 ซอย โรงงานกระดาษ ถนน ท้ายบ้าน ตำบล ท้ายบ้าน อำเภอ เมืองสมุทรปราการ จังหวัด สมุทรปราการ 10280",
@@ -219,6 +227,7 @@ export const coldRoomsData: ColdRoom[] = [
     },
     {
         bizID: "0105534055331",
+        bizName: "ฮาวี ลอจิสติกส์ (ประเทศไทย) จำกัด",
     RID: "C018.493.R0093",
     roomType: "ห้องเย็น",
     coldRoomAddress: "1ที่ตั้งคลัง 989 หมู่ 15 ถนน เคหะบางพลี ตำบล บางเสาธง อำเภอ บางเสาธง จังหวัด สมุทรปราการ 10540",

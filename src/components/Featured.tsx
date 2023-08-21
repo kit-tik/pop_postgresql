@@ -12,12 +12,12 @@ const Featured = ({knowledgeItems}: {knowledgeItems:KnowledgeItems}) => {
         {knowledgeItems.map((item) => (
           <div
             key={item.id}
-            className="w-screen h-[50vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50/60 transition-all duration-300 md:w-[50vw] xl:w-[25vw] xl:h-[50vh]"
+            className="w-screen h-[50vh] flex flex-col items-center justify-around p-4 hover:bg-violet-50/60 transition-all duration-300 md:w-[50vw] xl:w-[25vw] xl:h-[50vh]"
           >
             {/* IMAGE CONTAINER */}
             {item.img && (
-              <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
-                <Image src={item.img} alt="" fill className="object-contain" />
+              <div className="relative flex-1 w-full hover:rotate-[45deg] transition-all duration-500">
+                <Image src={item.img} alt="a featured image" fill sizes="(max-width: 768px) 100vw,(max-width: 1024px) 50vw, 25vw" className="object-contain" />
               </div>
             )}
             {/* TEXT CONTAINER */}
@@ -32,7 +32,7 @@ const Featured = ({knowledgeItems}: {knowledgeItems:KnowledgeItems}) => {
           </div>
         ))}
       </div>
-    </div>
+      </div>
   );
 };
 

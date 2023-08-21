@@ -7,14 +7,14 @@ export default function Page({ params }: { params: { id: string } }) {
   const coldRoom = coldRoomsData.filter((e) => e.RID === params.id);
   const singleColdRoom = coldRoom ? coldRoom[0] : null;
   if (singleColdRoom) {
-    const company = hbcdCompanyData.find(
-      (e) => singleColdRoom.bizID === e.bizID
-    ); // relationship to HBCDCompany
+    // const company = hbcdCompanyData.find(
+    //   (e) => singleColdRoom.bizID === e.bizID
+    // ); // relationship to HBCDCompany
     return (
         <div className="text-black mt-8 h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8">
         {/* TEXT CONTAINER */}
         <h1 className="text-xl uppercase xl:text-2xl text-blue-400">
-          <Link href={`/hbcd/company/${company?.bizID}`} className="hover:text-blue-600">{company?.name}</Link>
+          <Link href={`/hbcd/company/${singleColdRoom.bizID}`} className="hover:text-blue-600">{singleColdRoom.bizName}</Link>
         </h1>
           <h1 className="text-3xl font-bold uppercase xl:text-5xl text-blue-500">
             <span className="text-xl font-bold uppercase xl:text-2xl text-blue-300">ห้องเย็น:</span> {singleColdRoom.RID}

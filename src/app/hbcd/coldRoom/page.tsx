@@ -1,7 +1,59 @@
 import { coldRoomsData } from "@/data/sampleData";
+import { ColdRoom } from "@/data/types";
 import Link from "next/link";
+import { ReactNode } from "react";
+
+function RoomRow({room} : {room:ColdRoom}) {
+  return (
+    <tr key={room.RID} className="odd:bg-blue-500/20 even:bg-white border border-slate-300 last:rounded-b-lg">
+    <td className="border border-slate-300 text-center p-4">
+    <Link
+          href={`/hbcd/coldRoom/${room.RID}`}
+          className="hover:text-blue-500"
+          // style={{ backgroundImage: `url('/coldRoom.jpeg')` }}
+        >{room.RID}
+  </Link>
+  </td>
+    <td className="border border-slate-300 p-4 ">{room.coldRoomAddress.substring(0,40)}</td>
+    <td className="border border-slate-300 p-4 ">{room.province}</td>
+    <td className="border border-slate-300 p-4 ">{room.year}</td>
+  </tr>  );
+}
+
+function CompanyRow({ bizName, bizID }: {bizName: string, bizID:string}) {
+  return (
+    <tr>
+      <th colSpan={4}  className=" bg-indigo-100 text-xl text-left p-4">
+        <Link
+              href={`/hbcd/company/${bizID}`}
+              className="hover:text-blue-500"
+              // style={{ backgroundImage: `url('/coldRoom.jpeg')` }}
+            >{bizName}
+      </Link>
+      </th>
+    </tr>
+  );
+}
 
 export default function Page() {
+  const rows:ReactNode[] = [];
+  let lastCompany = "";
+
+  coldRoomsData.forEach((room) => {
+    if (room.bizName !== lastCompany) {
+      rows.push(
+        <CompanyRow
+          bizID={room.bizID}
+          bizName={room.bizName}
+          key={room.bizName} />
+      );
+    }
+    rows.push(
+      <RoomRow room={room} key={room.RID} />
+    );
+    lastCompany = room.bizName;
+  });
+
   return (
       <div className="p-4 lg:px-20  items-center">
         {/* <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col gap-2 md:flex-row items-center"> */}
@@ -12,40 +64,16 @@ export default function Page() {
         <thead>
           <tr className='bg-blue-500 text-white border border-slate-300 rounded-t-md'>
             <th className="p-4 border border-slate-300 text-center">RID</th>
-            <th className="p-4 border border-slate-300 text-center">Biz ID</th>
             <th className="p-4 border border-slate-300 text-center">ที่ตั้งห้องเย็น</th>
             <th className="p-4 border border-slate-300 text-center">จังหวัด</th>
+            <th className="p-4 border border-slate-300 text-center">ปีที่สร้าง</th>
           </tr>
         </thead>
-        <tbody>
-        {coldRoomsData.map((room) => (
-          <tr key={room.RID} className="odd:bg-blue-500/20 even:bg-white border border-slate-300 last:rounded-b-lg">
-          <td className="border border-slate-300 text-center p-4">
-          <Link
-                href={`/hbcd/coldRoom/${room.RID}`}
-                className="hover:text-blue-500"
-                // style={{ backgroundImage: `url('/coldRoom.jpeg')` }}
-              >{room.RID}
-        </Link>
-        </td>
-        <td className="border border-slate-300 text-center p-4">
-              <Link
-                    href={`/hbcd/company/${room.bizID}`}
-                    className="hover:text-blue-500"
-                    // style={{ backgroundImage: `url('/coldRoom.jpeg')` }}
-                  >{room.bizID}
-            </Link>
-            </td>
-          <td className="border border-slate-300 p-4 ">{room.coldRoomAddress.substring(0,40)}</td>
-          <td className="border border-slate-300 p-4 ">{room.province}</td>
-        </tr>))}
-        </tbody>
+        <tbody>{rows}</tbody>
       </table>
       </div>
       </div>
     )
-  
-
     // <div>
     //   <h1 className="col-span-2">Cold Room Page</h1>
     //   <div className="p-4 lg:px-20 xl:px-40 min-h-0 md:flex md:flex-col md:flex-wrap gap-2 items-center justify-stretch">
