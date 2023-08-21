@@ -1,4 +1,4 @@
-import { coldRoomsData } from "@/data/sampleData";
+//import { coldRoomsData } from "@/data/sampleData";
 import { ColdRoom } from "@/data/types";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -14,9 +14,9 @@ function RoomRow({room} : {room:ColdRoom}) {
         >{room.RID}
   </Link>
   </td>
-    <td className="border border-slate-300 p-4 ">{room.coldRoomAddress.substring(0,40)}</td>
+    <td className="border border-slate-300 p-4 text-sm">{room.coldRoomAddress.substring(0,50)}</td>
     <td className="border border-slate-300 p-4 ">{room.province}</td>
-    <td className="border border-slate-300 p-4 ">{room.year}</td>
+    <td className="hidden md:block border border-slate-300 p-4 ">{room.year}</td>
   </tr>  );
 }
 
@@ -35,23 +35,38 @@ function CompanyRow({ bizName, bizID }: {bizName: string, bizID:string}) {
   );
 }
 
-export default function Page() {
+const getData = async ()=>{
+  const serverUrl = `${process.env.NEXT_PUBLIC_API_URL}/coldRoom`;
+  const res = await fetch(serverUrl ,{
+    cache:"no-store"
+  })
+
+  if(!res.ok){
+   throw  new Error("Failed!");
+  }
+
+  return res.json()
+}
+
+const Page  =  async () => {
+  const coldRoomsData: ColdRoom[] = await getData();
+
   const rows:ReactNode[] = [];
   let lastCompany = "";
 
   coldRoomsData.forEach((room) => {
-    if (room.bizName !== lastCompany) {
+    if (room.company.name !== lastCompany) {
       rows.push(
         <CompanyRow
           bizID={room.bizID}
-          bizName={room.bizName}
-          key={room.bizName} />
+          bizName={room.company.name}
+          key={room.bizID} />
       );
     }
     rows.push(
       <RoomRow room={room} key={room.RID} />
     );
-    lastCompany = room.bizName;
+    lastCompany = room.company.name;
   });
 
   return (
@@ -66,7 +81,7 @@ export default function Page() {
             <th className="p-4 border border-slate-300 text-center">RID</th>
             <th className="p-4 border border-slate-300 text-center">ที่ตั้งห้องเย็น</th>
             <th className="p-4 border border-slate-300 text-center">จังหวัด</th>
-            <th className="p-4 border border-slate-300 text-center">ปีที่สร้าง</th>
+            <th className="hidden md:block p-4 border border-slate-300 text-center">ปีที่สร้าง</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -97,3 +112,4 @@ export default function Page() {
     // </div>
   // );
 }
+export default Page;

@@ -89,7 +89,7 @@ export type ColdRoom = {
   panelClass: string;
   foamMass: number;
   bizID: string;  // relationship to HBCDCompany
-  bizName: string;
+  company: {name: string} 
 };
 export type HBCDCompany = {
   name: string;
@@ -99,7 +99,8 @@ export type HBCDCompany = {
   officeAddress: string;
   officeTelNo: string;
   province: string;
-  coldRoom_RIDs?: string[]; // relationship to ColdRooms
+  coldRooms?: {RID: string}[]; // relationship to ColdRooms
+  _count: {coldRooms: number};
 };
 // export const company: HBCDCompany = [];
 

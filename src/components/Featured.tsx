@@ -37,3 +37,4 @@ const Featured = ({knowledgeItems}: {knowledgeItems:KnowledgeItems}) => {
 };
 
 export default Featured;
+

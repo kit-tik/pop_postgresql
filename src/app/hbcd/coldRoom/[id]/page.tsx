@@ -1,20 +1,31 @@
 import React from "react";
 import Link from 'next/link';
+import { ColdRoom } from "@/data/types";
 
-import { coldRoomsData, hbcdCompanyData } from "@/data/sampleData";
+// import { coldRoomsData, hbcdCompanyData } from "@/data/sampleData";
+ 
+const getData = async (id: string) => {
+  const serverUrl = `${process.env.NEXT_PUBLIC_API_URL}/coldRoom/${id}`;
 
-export default function Page({ params }: { params: { id: string } }) {
-  const coldRoom = coldRoomsData.filter((e) => e.RID === params.id);
-  const singleColdRoom = coldRoom ? coldRoom[0] : null;
+  const res = await fetch(serverUrl, {
+    cache: "no-store",
+  });
+
+  if(!res.ok){
+   throw  new Error("Failed!");
+  }
+
+  return res.json()
+}
+
+const Page = async ({ params }: { params: { id: string } }) => {
+  const singleColdRoom: ColdRoom = await getData(params.id);
   if (singleColdRoom) {
-    // const company = hbcdCompanyData.find(
-    //   (e) => singleColdRoom.bizID === e.bizID
-    // ); // relationship to HBCDCompany
     return (
         <div className="text-black mt-8 h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8">
         {/* TEXT CONTAINER */}
-        <h1 className="text-xl uppercase xl:text-2xl text-blue-400">
-          <Link href={`/hbcd/company/${singleColdRoom.bizID}`} className="hover:text-blue-600">{singleColdRoom.bizName}</Link>
+        <h1 className="text-lg uppercase xl:text-xl text-blue-400">
+          <Link href={`/hbcd/company/${singleColdRoom.bizID}`} className="hover:text-blue-600">{singleColdRoom.company.name}</Link>
         </h1>
           <h1 className="text-3xl font-bold uppercase xl:text-5xl text-blue-500">
             <span className="text-xl font-bold uppercase xl:text-2xl text-blue-300">ห้องเย็น:</span> {singleColdRoom.RID}
@@ -33,10 +44,16 @@ export default function Page({ params }: { params: { id: string } }) {
             {singleColdRoom.province}
           </p>
           </div>
+          <div className="grid grid-cols-2">
           <p>
             <span className="font-bold text-gray-600">ประเภทธุรกิจ:</span>{" "}
             {singleColdRoom.productType}
           </p>
+          <p>
+            <span className="font-bold text-gray-600">ประเภทห้อง:</span>{" "}
+            {singleColdRoom.roomType}
+          </p>
+          </div>
 
           <div className="grid grid-cols-2">
           <h2 className="col-span-2 my-2 font-bold text-xl">ขนาดห้อง: </h2>
@@ -54,7 +71,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </p>
           <p>
             <span className="font-bold text-gray-600">
-              น้ำหนักโฟม (กก. (โดยประมาณ)):
+              น้ำหนักโฟม (กก. (ค่าประมาณ)):
             </span>{" "}
             {singleColdRoom.foamMass}
           </p>
@@ -64,7 +81,7 @@ export default function Page({ params }: { params: { id: string } }) {
             {singleColdRoom.minTemp}
           </p>
           <p>
-            <span className="font-bold text-gray-600">อุณหภูมิต่ำสุด:</span>{" "}
+            <span className="font-bold text-gray-600">อุณหภูมิสูงสุด:</span>{" "}
             {singleColdRoom.maxTemp}
           </p>
 
@@ -88,7 +105,8 @@ export default function Page({ params }: { params: { id: string } }) {
     );
   } else {
     return (
-      <div className="text-red">Not found the company with bizId {id}</div>
+      <div className="text-red">Not found the coldRoom with bizId {params.id}</div>
     );
   }
 }
+export default Page;

@@ -1,7 +1,23 @@
-import { hbcdCompanyData } from "@/data/sampleData";
+// import { hbcdCompanyData } from "@/data/sampleData";
+import {HBCDCompany} from '@/data/types'
 import Link from "next/link";
 
-export default function Page() {
+const getData = async ()=>{
+  const serverUrl = `${process.env.NEXT_PUBLIC_API_URL}/hbcdCompany`;
+  const res = await fetch(serverUrl, {
+    cache:"no-store"
+  })
+
+  if(!res.ok){
+   throw  new Error("Failed!");
+  }
+
+  return res.json()
+}
+
+const Page  =  async () => {
+  const hbcdCompanyData: HBCDCompany[] = await getData();
+
   return (
     <div className="p-4 lg:px-20   items-center">
       {/* <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col gap-2 md:flex-row items-center"> */}
@@ -13,14 +29,15 @@ export default function Page() {
         <tr className='bg-blue-500 text-white border border-slate-300 rounded-t-md'>
           {/* <th className="p-4 border border-slate-300 text-center">Biz Id</th> */}
           <th className="p-4 border border-slate-300 text-center">ชื่อ</th>
-          <th className="p-4 border border-slate-300 text-center">ประเภทธุรกิจ</th>
+          <th className="hidden md:block p-4 border border-slate-300 text-center">ประเภทธุรกิจ</th>
           <th className="p-4 border border-slate-300 text-center">จังหวัด</th>
+          <th className="p-4 border border-slate-300 text-center">จำนวนห้องเย็น</th>
         </tr>
       </thead>
       <tbody>
       {hbcdCompanyData.map((company) => (
         <tr key={company.bizID} className="odd:bg-blue-500/20 even:bg-white border border-slate-300 last:rounded-b-lg">
-            <td className="border border-slate-300 text-center p-4">
+            <td className="border border-slate-300 p-4">
             <Link
                   href={`/hbcd/company/${company.bizID}`}
                   key={company.bizID}
@@ -30,8 +47,9 @@ export default function Page() {
           </Link>
           </td>
         {/* <td className="border border-slate-300 p-4 ">{company.name}</td> */}
-        <td className="border border-slate-300 p-4 ">{company.bizType}</td>
+        <td className="hidden md:block border border-slate-300 p-4 ">{company.bizType}</td>
         <td className="border border-slate-300 p-4 ">{company.province}</td>
+        <td className="border border-slate-300 p-4 text-center">{company._count.coldRooms}</td>
       </tr>))}
       </tbody>
     </table>
@@ -57,3 +75,4 @@ export default function Page() {
     </div>
       );*/}
 }
+export default Page
